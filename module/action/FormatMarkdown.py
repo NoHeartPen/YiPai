@@ -17,12 +17,15 @@ def All2Half_(AllWideNums):
         HalfWideNums = " ".join(map(str, HalfWideNumsList))
     return HalfWideNums
 
-##
+# aciton\FormatMarkdown.py
 
 def del_slash(inputline):
     if "。\n" in inputline:
         outputline = inputline
-        print(outputline)
+    elif "」\n" in inputline:
+        outputline = inputline
+    elif "”" in inputline:
+        outputline = inputline
     else:
         outputline = inputline.replace("\n", "")
     return outputline

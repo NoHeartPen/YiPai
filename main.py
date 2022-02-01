@@ -10,7 +10,8 @@ import tkinter as tk
 import ctypes
 from tkinter import ttk
 
-# modle\situation\docx.py
+
+# module\situation\docx2md.py
 def docx2md(docx2md_File):
     file = Document(docx2md_File)
     paragraphs = []
@@ -29,12 +30,10 @@ def docx2md(docx2md_File):
     print('docx2md  Successfully')
 
 
-# target
-## md2docx_1lang
-def md2docx_1lang(file):
+# module\target\md2docx_2lang.py
+def md2docx_2lang(file):
     document = Document()
     with open(file, 'r', encoding='UTF-8') as ProcessFile:
-        cards = []
         lines = ProcessFile.readlines()
         i = 0
         row = 0
@@ -42,11 +41,11 @@ def md2docx_1lang(file):
 
         while i < len(lines):
             if i % 2 == 0:
-                Rightcell = table.cell(row, 1)
+                Rightcell = table.cell(row, 0)
                 Rightcell.text = lines[i].replace('\n', '')
                 i = i + 1
             elif i % 2 == 1:
-                LeftCell = table.cell(row, 0)
+                LeftCell = table.cell(row, 1)
                 LeftCell.text = lines[i].replace('\n', '')
                 i = i + 1
                 row += 1
@@ -55,16 +54,18 @@ def md2docx_1lang(file):
                 continue
 
         for row in table.rows:  #设置中文字体
-            for paragraph in row.cells[0].paragraphs:
-                paragraph.paragraph_format.first_line_indent = Pt(22)
-            for run in paragraph.runs:
-                run.font.name = '华文楷体'
-                run._element.rPr.rFonts.set(qn('w:eastAsia'), u'华文楷体')
+            for paragraph in row.cells[1].paragraphs:
+                paragraph.paragraph_format.first_line_indent = Pt(18)
+                for run in paragraph.runs:
+                    run.font.name = '华文楷体'
+                    run.font.size = Pt(9)
+                    run._element.rPr.rFonts.set(qn('w:eastAsia'), u'华文楷体')
 
-            for paragraph in row.cells[1].paragraphs:  # 设置日文字体
-                paragraph.paragraph_format.first_line_indent = Pt(11)
+            for paragraph in row.cells[0].paragraphs:  # 设置日文字体
+                paragraph.paragraph_format.first_line_indent = Pt(9)
                 for run in paragraph.runs:
                     run.font.name = 'MS Mincho'
+                    run.font.size = Pt(9)
                     run._element.rPr.rFonts.set(qn('w:eastAsia'), u'MS Mincho')
 
     ProcessFile.close()
@@ -72,20 +73,48 @@ def md2docx_1lang(file):
         os.path.basename(file).replace(".md", "")))
 
 
-'''## md2docx_2lang
-def md2docx_2lang():
-    '''
+# module\target\md2docx_1lang.py
+def md2docx_1lang(file):
+    document = Document()
+    with open(file, 'r', encoding='UTF-8') as ProcessFile:
+        cards = []
+        lines = ProcessFile.readlines()
+        i = 0
+        row = 0
+        table = document.add_table(rows=len(lines), cols=2)
 
-## docx2pdf
-'''def docx2pdf():
-    inputFile = r".process\IMG_20220128_101550.docx"
-    open(r'.process\IMG_20220128_101550.pdf', 'w').close()
-    outputFile = r".process\IMG_20220128_101550.pdf" 
-    convert(inputFile, outputFile)'''
+        while i < len(lines):
+            LeftCell = table.cell(row, 0)
+            LeftCell.text = lines[i].replace('\n', '')
+            i = i + 1
+            row += 1
+
+        for row in table.rows:
+            for paragraph in row.cells[0].paragraphs:
+                paragraph.paragraph_format.first_line_indent = Pt(9)
+                for run in paragraph.runs:
+                    run.font.name = 'MS Mincho'
+                    run.font.size = Pt(9)
+                    run._element.rPr.rFonts.set(qn('w:eastAsia'), u'MS Mincho')
+    ProcessFile.close()
+    document.save(".YiPai\.process\{}.docx".format(
+        os.path.basename(file).replace(".md", "")))
+
+
+# target\docx2pdf.py
+def printdocx2pdf(file):
+    InputFileName = os.path.basename(file)
+    ProcessFileName = r".YiPai\.process\{}".format(InputFileName).replace(
+        "docx", "pdf")
+    ProcessFile = open(ProcessFileName, 'w').close()
+    convert(file, ProcessFileName)
 
 
 # Action
+
 ##
+
+
 def All2Half_(AllWideNums):
     HalfWideNumsList = []
     for num in AllWideNums:
@@ -101,17 +130,24 @@ def All2Half_(AllWideNums):
 
 
 ## 删除不必要的换行符
+
+
 def del_slash(inputline):
     if "。\n" in inputline:
+        outputline = inputline
+    elif "」\n" in inputline:
+        outputline = inputline
+    elif "”" in inputline:
         outputline = inputline
     else:
         outputline = inputline.replace("\n", "")
     return outputline
 
 
-## 格式化
-def formatmd(file):
+# action\FormatMarkdown.py
 
+
+def formatmd(file):
     with open(file, 'r', encoding='UTF-8') as ProcessFile:
         OutputLines = []
         InputLines = ProcessFile.readlines()
@@ -131,10 +167,12 @@ def formatmd(file):
 
 
 # Result
-## result\moveoutput
+
+## result\moveoutput.py
+
+
 def moveoutput(file):
     oldname = os.path.abspath(file)
-    print(oldname)
     newname = os.path.abspath(oldname).replace(".YiPai\.process", "")
     shutil.move(oldname, newname)
 
@@ -151,6 +189,7 @@ def Situation(Filepath):
         docx2md(docx2md_File)
         print("run")
 
+
 # Action
 def Action():
     ProcessFilePath = os.getcwd() + '\\' + '.process' + '\\'
@@ -159,13 +198,27 @@ def Action():
     for file in FileList:
         formatmd(file)
 
-## Target
-def Target():
+
+# Target
+def Target1lang():
     FileList = list(p.glob("**/*.md"))
     for file in FileList:
         md2docx_1lang(file)
 
-## Result
+
+def Target2lang():
+    FileList = list(p.glob("**/*.md"))
+    for file in FileList:
+        md2docx_2lang(file)
+
+
+def Print():
+    FileList = list(p.glob("**/*.docx"))
+    for file in FileList:
+        printdocx2pdf(file)
+
+
+# Result
 def Result():
     ProcessFilePath = os.getcwd() + '\\' + '.YiPai\\.process' + '\\'
     p = Path(ProcessFilePath)
@@ -173,12 +226,20 @@ def Result():
     for file in FileList:
         # 如果勾选了MD那么就必须
         moveoutput(file)
-        print(file)
 
-def RunApp(event):
+
+def Run1lang(event):
     Situation(p)
     Action()
-    Target()
+    Target1lang()
+    Result()
+
+
+def Run2lang(event):
+    Situation(p)
+    Action()
+    Target2lang()
+    Print()
     Result()
 
 
@@ -203,18 +264,12 @@ class App:
                              background="#ffffff",
                              sticky="nsew")
 
-        self.RunAppButton = ttk.Button(frame,
-                                       text="Run",
-                                       style='RunAppButton.TLabel')
-        self.RunAppButton.bind("<Button-1>", RunApp)
-        self.RunAppButton.pack()
-
         self.content = ttk.Notebook(frame)
         self.content.pack()
 
+        # Situation
         self.frame1 = ttk.Frame(self.content)
         self.content.add(self.frame1, text="Situation")
-
         InputFileType = tk.StringVar()
         self.menu_button = ttk.Menubutton(self.frame1, text='待处理文件格式')
         menu = tk.Menu(self.menu_button, tearoff=False)
@@ -434,6 +489,18 @@ class App:
         # model_result
         self.frame4 = ttk.Frame(self.content)
         self.content.add(self.frame4, text="Result")
+
+        self.frame5 = ttk.Frame(self.content)
+        self.content.add(self.frame5, text="Run")
+        self.RunAppButton = ttk.Button(
+            self.frame5, text="单语文件转换")  #,style='RunAppButton.TLabel'
+        self.RunAppButton.bind("<Button-1>", Run1lang)
+        self.RunAppButton.grid(row=0, column=0)
+
+        self.RunAppButton = ttk.Button(
+            self.frame5, text="双语文件转换")  #,style='RunAppButton.TLabel'
+        self.RunAppButton.bind("<Button-1>", Run2lang)
+        self.RunAppButton.grid(row=1, column=0)
 
 
 if __name__ == "__main__":
