@@ -93,6 +93,8 @@
 
 # 版权和鸣谢
 
+感谢我的室友LHY，没有他的鼓励与建议，就不会有这个项目。也感谢一直以来包容、支持我的亲人、朋友、同学、老师……遇见你们真好。：）
+
 版权所有 (c) 2022 [NoHeartPen](https://github.com/NoHeartPen) 和其他贡献者。保留所有权利。
 
 使用 **[MPL 2.0 许可证](https://github.com/NoHeartPen/YiPai/blob/main/LICENSE)** 进行许可。
