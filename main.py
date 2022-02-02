@@ -119,6 +119,8 @@ def All2Half_(AllWideNums):
     for num in AllWideNums:
         if ord(num) == 65292:  # 全角逗号
             HalfWideNumsList.append(num)
+        elif ord(num) == 65311:  # 全角问号
+            HalfWideNumsList.append(num)
         elif 65281 <= ord(num) <= 65374:
             HalfWideNum = chr(int(ord(num) - 65248))
             HalfWideNumsList.append(HalfWideNum)
@@ -137,6 +139,8 @@ def del_slash(inputline):
     elif "」\n" in inputline:
         outputline = inputline
     elif "”\n" in inputline:
+        outputline = inputline
+    elif "？" in inputline:
         outputline = inputline
     else:
         outputline = inputline.replace("\n", "")
