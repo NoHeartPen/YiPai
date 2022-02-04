@@ -23,3 +23,11 @@
 ### Result
 
 对
+
+# 经验
+
+## Python版本
+
+软件的前端是Ttkinter,在Python2 系列版本必须通过`import `，而 Python3 则是`import `
+
+## 跨平台 
