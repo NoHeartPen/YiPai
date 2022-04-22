@@ -113,9 +113,6 @@ def printdocx2pdf(file):
 
 # Action
 
-##
-
-
 def All2Half_(AllWideNums):
     HalfWideNumsList = []
     for num in AllWideNums:
