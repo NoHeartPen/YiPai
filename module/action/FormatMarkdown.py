@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import re
-import all2half_number
+#import all2half_number
 
 # 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
 def All2Half_(AllWideNums):
@@ -45,9 +45,9 @@ for InputFile in InputFileList:
             else:
                 OutputLine = re.sub(r"▼$", "。", InputLine) # 删掉天声人语
                 OutputLine = re.sub(r"^\s", "", OutputLine)
-                OutputLine = all2half_number.All2Half_(OutputLine)
+                #OutputLine = all2half_number.All2Half_(OutputLine)
                 OutputLine = OutputLine.replace(" ","")
-                OutputLine = format_ocr.del_slash(OutputLine)
+                #OutputLine = format_ocr.del_slash(OutputLine)
                 OutputLines.append(OutputLine)
 
     with open(InputFile, 'w', encoding='UTF-8') as OutPutFile:

@@ -11,6 +11,11 @@ import ctypes
 from tkinter import ttk
 
 
+# Main
+Inputpath = os.getcwd()
+p = Path(Inputpath)
+ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
+
 # module\situation\docx2md.py
 def docx2md(docx2md_File):
     file = Document(docx2md_File)
@@ -18,15 +23,13 @@ def docx2md(docx2md_File):
 
     for p in file.paragraphs:  # 读取所有行
         paragraphs.append(p.text + "\n")
-    '''while paragraphs.count("\n") != 0:  # 删掉多余的空行，可以考虑后面统一处理
-        paragraphs.remove("\n")'''
 
-    with open(r".YiPai\.process\{}.md".format(
+    with open("{}.md".format(
+            ProcessFilePath +
             os.path.basename(docx2md_File).replace(".docx", "")),
               'w',
               encoding='UTF-8') as OutPutFile:
         OutPutFile.writelines(paragraphs)
-    print('docx2md  Successfully')
 
 
 # module\target\md2docx_2lang.py
@@ -180,22 +183,14 @@ def moveoutput(file):
     shutil.move(oldname, newname)
 
 
-# Main
-Inputpath = os.getcwd()
-p = Path(Inputpath)
-
-
 # Situation
-def Situation(Filepath):
-    docx2md_FileList = list(p.glob("**/*.docx"))
+def Situation():
+    docx2md_FileList = list(p.glob("**/*- 副本.docx"))
     for docx2md_File in docx2md_FileList:
         docx2md(docx2md_File)
-        print("run")
-
 
 # Action
 def Action():
-    ProcessFilePath = Inputpath + '\\.YiPai\\' + '.process' + '\\'
     p = Path(ProcessFilePath)
     FileList = list(p.glob("**/*.md"))
     for file in FileList:
@@ -204,7 +199,6 @@ def Action():
 
 # Target
 def Target1lang():
-    ProcessFilePath = Inputpath + '\\.YiPai\\' + '.process' + '\\'
     p = Path(ProcessFilePath)
     FileList = list(p.glob("**/*.md"))
     for file in FileList:
@@ -212,7 +206,6 @@ def Target1lang():
 
 
 def Target2lang():
-    ProcessFilePath = Inputpath + '\\.YiPai\\' + '.process' + '\\'
     p = Path(ProcessFilePath)
     FileList = list(p.glob("**/*.md"))
     for file in FileList:
@@ -220,7 +213,6 @@ def Target2lang():
 
 
 def Print():
-    ProcessFilePath = Inputpath + '\\.YiPai\\' + '.process' + '\\'
     p = Path(ProcessFilePath)
     FileList = list(p.glob("**/*.docx"))
     for file in FileList:
@@ -229,7 +221,6 @@ def Print():
 
 # Result
 def Result():
-    ProcessFilePath = Inputpath + '\\' + '.YiPai\\.process' + '\\'
     p = Path(ProcessFilePath)
     FileList = list(p.glob("**/*"))
     for file in FileList:
@@ -238,14 +229,14 @@ def Result():
 
 
 def Run1lang(event):
-    Situation(p)
+    Situation()
     Action()
     Target1lang()
     Result()
 
 
 def Run2lang(event):
-    Situation(p)
+    Situation()
     Action()
     Target2lang()
     Print()
