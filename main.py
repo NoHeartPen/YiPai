@@ -18,7 +18,6 @@ def docx2md(docx2md_File):
 
     for p in file.paragraphs:  # 读取所有行
         paragraphs.append(p.text + "\n")
-
     '''while paragraphs.count("\n") != 0:  # 删掉多余的空行，可以考虑后面统一处理
         paragraphs.remove("\n")'''
 
@@ -168,6 +167,7 @@ def formatmd(file):
     with open(file, 'w', encoding='UTF-8') as OutPutFile:
         OutPutFile.writelines(OutputLines)
     OutPutFile.close()
+
 
 # Result
 
