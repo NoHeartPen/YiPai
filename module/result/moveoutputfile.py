@@ -5,6 +5,7 @@ import shutil
 # Main
 Inputpath = os.getcwd()
 p = Path(Inputpath)
+ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
 
 
 ## result\moveoutput.py
@@ -16,8 +17,7 @@ def moveoutput(file):
 
 # Result
 def Result():
-    ProcessFilePath = Inputpath + '\\' + '.YiPai\\.process' + '\\'
-    p = Path(ProcessFilePath)
+    p = Path(ProcessFilePath)  # 请注意，这里的路径是工作文件夹
     FileList = list(p.glob("**/*"))
     for file in FileList:
         # 如果勾选了MD那么就必须
