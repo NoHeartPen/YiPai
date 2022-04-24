@@ -8,6 +8,7 @@ from pathlib import Path
 Inputpath = os.getcwd()
 p = Path(Inputpath)
 
+
 # module\target\md2docx_1lang.py
 def md2docx_1lang(file):
     document = Document()
@@ -42,5 +43,6 @@ def Target1lang():
     FileList = list(p.glob("**/*.md"))
     for file in FileList:
         md2docx_1lang(file)
+
 
 Target1lang()
