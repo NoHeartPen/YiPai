@@ -19,7 +19,7 @@
 3. Target: 以上一步生成的文件为基础，生成指定排版要求的docx，如果有需要，还会生成一个PDF文件
 4. Result: 将上一步生成的docx和pdf移到指定的文件夹
 
-如果你是一名开发者，更详细的技术细节请阅读`DEVELOPMENT_GUIDE.md`
+如果你是一名开发者，更详细的技术细节请阅读[`DEVELOPMENT_GUIDE.md`](DEVELOPMENT_GUIDE.md)
 
 ##  注意事项
 
@@ -28,7 +28,6 @@
 3. 生成的docx会直接**覆盖旧**文件，重要文件请做好备份
 4. 运行前请检查待处理文件是否被其他软件打开
 5. 请确保安装有Microsoft Word，只安装了WPS Word 的用户请自行下载安装
-6. 请不要在Windows 文件管理器的`下载`文件夹内运行该软件，有关这个bug的技术细节讨论，可以在这个Issue[软件无法生成docx文件](https://github.com/NoHeartPen/YiPai/issues/1)处查看
 
 ## 特性 
 
