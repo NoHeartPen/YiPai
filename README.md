@@ -1,5 +1,5 @@
 # 译排
-
+)
 一个为翻译领域的工作人员/学生设计的排版小工具。也是”有「译」有得“系列的第一款软件。
 
 ## 下载地址
@@ -20,6 +20,8 @@
 4. Result: 将上一步生成的docx和pdf移到指定的文件夹
 
 如果你是一名开发者，更详细的技术细节请阅读[`DEVELOPMENT_GUIDE.md`](DEVELOPMENT_GUIDE.md)
+
+有关这个软件的开发故事和设计初衷，可以在这篇语雀文档[「YiPai」·「译排」](https://www.yuque.com/noheartpen/tnxvz0/rdi750)处查看
 
 ##  注意事项
 
