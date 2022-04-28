@@ -10,11 +10,11 @@ import tkinter as tk
 import ctypes
 from tkinter import ttk
 
-
 # Main
 Inputpath = os.getcwd()
 p = Path(Inputpath)
 ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
+
 
 # module\situation\docx2md.py
 def docx2md(docx2md_File):
@@ -113,6 +113,7 @@ def printdocx2pdf(file):
 
 # Action
 
+
 def All2Half_(AllWideNums):
     HalfWideNumsList = []
     for num in AllWideNums:
@@ -185,6 +186,7 @@ def Situation():
     docx2md_FileList = list(p.glob("**/*- 副本.docx"))
     for docx2md_File in docx2md_FileList:
         docx2md(docx2md_File)
+
 
 # Action
 def Action():
@@ -506,6 +508,7 @@ if __name__ == "__main__":
 
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
     ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
+    root.iconphoto(True, tk.PhotoImage(file='.YiPai\main.png'))
     root.call('tk', 'scaling', ScaleFactor / 75)
     #root.resizable(False, False)
 
