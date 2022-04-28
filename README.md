@@ -19,7 +19,7 @@
 3. Target: 以上一步生成的文件为基础，生成指定排版要求的docx，如果有需要，还会生成一个PDF文件
 4. Result: 将上一步生成的docx和pdf移到指定的文件夹
 
-如果你是一名开发者，更详细的技术细节请阅读[`DEVELOPMENT_GUIDE.md`](DEVELOPMENT_GUIDE.md)
+如果你是一名开发者，更详细的技术细节请阅读[`DEVELOPMENT_GUIDE.md`](.\module\DEVELOPMENT_GUIDE.md)
 
 有关这个软件的开发故事和设计初衷，可以在这篇语雀文档[「YiPai」·「译排」](https://www.yuque.com/noheartpen/tnxvz0/rdi750)处查看
 
