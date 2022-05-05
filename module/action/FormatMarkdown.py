@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
 import re
+
 #import all2half_number
+
 
 # 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
 def All2Half_(AllWideNums):
@@ -17,7 +19,9 @@ def All2Half_(AllWideNums):
         HalfWideNums = " ".join(map(str, HalfWideNumsList))
     return HalfWideNums
 
+
 # aciton\FormatMarkdown.py
+
 
 def del_slash(inputline):
     if "。\n" in inputline:
@@ -40,13 +44,13 @@ for InputFile in InputFileList:
         OutputLines = []
         InputLines = ProcessFile.readlines()
         for InputLine in InputLines:
-            if InputLine == "\n":# 删掉空行
+            if InputLine == "\n":  # 删掉空行
                 continue
             else:
-                OutputLine = re.sub(r"▼$", "。", InputLine) # 删掉天声人语
+                OutputLine = re.sub(r"▼$", "。", InputLine)  # 删掉天声人语
                 OutputLine = re.sub(r"^\s", "", OutputLine)
                 #OutputLine = all2half_number.All2Half_(OutputLine)
-                OutputLine = OutputLine.replace(" ","")
+                OutputLine = OutputLine.replace(" ", "")
                 #OutputLine = format_ocr.del_slash(OutputLine)
                 OutputLines.append(OutputLine)
 
