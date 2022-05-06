@@ -2,7 +2,10 @@ import os
 from pathlib import Path
 import re
 
-#import all2half_number
+# Main
+Inputpath = os.getcwd()
+p = Path(Inputpath)
+ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
 
 
 # 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
@@ -21,8 +24,6 @@ def All2Half_(AllWideNums):
 
 
 # aciton\FormatMarkdown.py
-
-
 def del_slash(inputline):
     if "。\n" in inputline:
         outputline = inputline
@@ -35,12 +36,8 @@ def del_slash(inputline):
     return outputline
 
 
-path = os.getcwd()
-p = Path(path)
-
-InputFileList = list(p.glob("**/*.md"))
-for InputFile in InputFileList:
-    with open(InputFile, 'r', encoding='UTF-8') as ProcessFile:
+def formatmd(file):
+    with open(file, 'r', encoding='UTF-8') as ProcessFile:
         OutputLines = []
         InputLines = ProcessFile.readlines()
         for InputLine in InputLines:
@@ -49,10 +46,23 @@ for InputFile in InputFileList:
             else:
                 OutputLine = re.sub(r"▼$", "。", InputLine)  # 删掉天声人语
                 OutputLine = re.sub(r"^\s", "", OutputLine)
-                #OutputLine = all2half_number.All2Half_(OutputLine)
+                OutputLine = All2Half_(OutputLine)
                 OutputLine = OutputLine.replace(" ", "")
-                #OutputLine = format_ocr.del_slash(OutputLine)
+                OutputLine = del_slash(OutputLine)
+                print(OutputLine)
                 OutputLines.append(OutputLine)
-
-    with open(InputFile, 'w', encoding='UTF-8') as OutPutFile:
+    ProcessFile.close()
+    with open(file, 'w', encoding='UTF-8') as OutPutFile:
         OutPutFile.writelines(OutputLines)
+    OutPutFile.close()
+
+
+# Action
+def Action():
+    p = Path(ProcessFilePath)
+    FileList = list(p.glob("**/*.md"))
+    for file in FileList:
+        print(file)
+        formatmd(file)
+
+Action()
