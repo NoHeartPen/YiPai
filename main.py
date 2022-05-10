@@ -102,13 +102,15 @@ def md2docx_1lang(file):
         os.path.basename(file).replace(".md", "")))
 
 
-# target\docx2pdf.py
+# module\target\printdocx2pdf.py
 def printdocx2pdf(file):
     InputFileName = os.path.basename(file)
     ProcessFileName = r".YiPai\.process\{}".format(InputFileName).replace(
         "docx", "pdf")
-    ProcessFile = open(ProcessFileName, 'w').close()
-    convert(file, ProcessFileName)
+    ProcessFile = open(ProcessFileName, 'w')
+    ProcessFile.close()
+    convert(file, ProcessFileName
+            )  # 注意file的数据类型是pathlib.WindowsPath，而ProcessFileName是字符串
 
 
 # Action
