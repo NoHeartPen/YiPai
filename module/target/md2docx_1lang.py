@@ -7,6 +7,7 @@ from pathlib import Path
 # Main
 Inputpath = os.getcwd()
 p = Path(Inputpath)
+ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
 
 
 # module\target\md2docx_1lang.py
@@ -38,7 +39,6 @@ def md2docx_1lang(file):
 
 # Target
 def Target1lang():
-    ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
     p = Path(ProcessFilePath)
     FileList = list(p.glob("**/*.md"))
     for file in FileList:
