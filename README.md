@@ -1,6 +1,13 @@
 # 译排
 
 一个为翻译领域的工作人员/学生设计的排版小工具。也是”有「译」有得“系列的第一款软件。
+[工作量](https://moraviait-my.sharepoint.com/:x:/g/personal/sherry_zhang_rws_com/EQ2MVfC1GQ5Mv-EfoCIgfqABDybWvHS1X0UNyEvkg7Ocsw?rtime=SnXakYwm2kg)
+
+# UK
+
+# JP
+
+# 语言工程
 
 ## 下载地址
 
@@ -81,6 +88,9 @@
 - 以句为单位，切分排版
 - 同时调用各大厂商（百度、搜狗、Google）的机器翻译API翻译文章，并将翻译结果单独编为一列，便于进行比较
 - 调用百度OCR的接口，将文档内的图片转为文字
+- 支持通过一行连续的分隔符（比如“：=====“），将一段双语问文本自动分成2列对齐
+- 支持自定义行间距和页边距
+- 支持表格框线
 - ……
 
 ## UI
