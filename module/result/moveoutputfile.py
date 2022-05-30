@@ -18,6 +18,7 @@ def moveoutput(file):
 # Result
 def Result():
     p = Path(ProcessFilePath)  # 请注意，这里的路径是工作文件夹
+    print(p)
     FileList = list(p.glob("**/*"))
     for file in FileList:
         # 如果勾选了MD那么就必须
