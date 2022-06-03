@@ -4,7 +4,7 @@ import os
 import re
 from docx.oxml.ns import qn  # 用于设置中日文字体
 from docx.shared import Pt  # 设置文本缩进
-import shutil
+import shutil # pip install shutilwhich
 from docx2pdf import convert
 import tkinter as tk
 import ctypes
@@ -512,7 +512,7 @@ if __name__ == "__main__":
     ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
     root.iconphoto(True, tk.PhotoImage(file='.YiPai\main.png'))
     root.call('tk', 'scaling', ScaleFactor / 75)
-    #root.resizable(False, False)
+    root.resizable(False, False)
 
     root.tk.call("source", r".YiPai\sun-valley.tcl")
     root.tk.call("set_theme", "light")

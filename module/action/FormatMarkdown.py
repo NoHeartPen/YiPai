@@ -49,7 +49,6 @@ def formatmd(file):
                 OutputLine = All2Half_(OutputLine)
                 OutputLine = OutputLine.replace(" ", "")
                 OutputLine = del_slash(OutputLine)
-                print(OutputLine)
                 OutputLines.append(OutputLine)
     ProcessFile.close()
     with open(file, 'w', encoding='UTF-8') as OutPutFile:
@@ -62,7 +61,6 @@ def Action():
     p = Path(ProcessFilePath)
     FileList = list(p.glob("**/*.md"))
     for file in FileList:
-        print(file)
         formatmd(file)
 
 Action()

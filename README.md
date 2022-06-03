@@ -3,12 +3,6 @@
 一个为翻译领域的工作人员/学生设计的排版小工具。也是”有「译」有得“系列的第一款软件。
 [工作量](https://moraviait-my.sharepoint.com/:x:/g/personal/sherry_zhang_rws_com/EQ2MVfC1GQ5Mv-EfoCIgfqABDybWvHS1X0UNyEvkg7Ocsw?rtime=SnXakYwm2kg)
 
-# UK
-
-# JP
-
-# 语言工程
-
 ## 下载地址
 
 [蓝奏云](https://wwi.lanzoup.com/b011919xa)密码:9bxx（打开不开的话，参考[蓝奏云打不开的10种处理方法-知乎](https://zhuanlan.zhihu.com/p/407316457)）
@@ -130,4 +124,8 @@
 
 ## 开发环境
 
-- Python 3.9 
+- Python 3.9
+
+## 第三方库
+
+`pip install -r requirements.txt`
