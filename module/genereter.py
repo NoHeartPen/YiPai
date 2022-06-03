@@ -1,26 +1,29 @@
 import os
 from pathlib import Path
 
-os.chdir('D:\#Temp\RWS实习\PDF')
+# Main
+Inputpath = os.getcwd()
+p = Path(Inputpath)
+ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
 
-ProcessFilePath = os.getcwd()
 
-p = Path(ProcessFilePath)
-FileList = list(p.glob("**/*.pdf"))
+file = (i for i in ProcessFileList) # 注意，这里返回的是一个生成器对象
+allfile = len(ProcessFileList)
+for i in range(allfile):
+    ProcessFile = next(file)
+    Now = round((i / allfile) * 100)
+    Done = '█' * int(Now)
+    Undo = '_' * (100 - int(Now))
+    print("\r{:^3.0f}%[{}->{}]".format(Now, Done, Undo), end='')
+print("恭喜！文件转换完毕")
 
-FileListNumber = len(FileList)
 
-'''
-def YieldProcessFile(FileList):
-    print(FileList)
+# Action
+def Action():
+    p = Path(ProcessFilePath)
+    FileList = list(p.glob("**/*.md"))
     for file in FileList:
-        yield file
-'''
+        formatmd(file)
 
-file = (i for i in FileList) #这种要怎么才能进行遍历呢
 
-print(file) # 不使用next激活的话，返回的是一个generate对象
-'''
-for i in range(len(FileList)):
-    print(next(file))
-'''
+Action()

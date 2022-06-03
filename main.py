@@ -4,7 +4,7 @@ import os
 import re
 from docx.oxml.ns import qn  # 用于设置中日文字体
 from docx.shared import Pt  # 设置文本缩进
-import shutil # pip install shutilwhich
+import shutil  # pip install shutilwhich
 from docx2pdf import convert
 import tkinter as tk
 import ctypes
@@ -30,6 +30,13 @@ def docx2md(docx2md_File):
               'w',
               encoding='UTF-8') as OutPutFile:
         OutPutFile.writelines(paragraphs)
+
+
+# module\situation\md2md.py
+def md2md(InputFile):
+    InputFileName = os.path.basename(InputFile)
+    ProcessFileName = ProcessFilePath + InputFileName
+    shutil.copy(InputFileName, ProcessFileName)
 
 
 # module\target\md2docx_2lang.py
@@ -113,6 +120,36 @@ def printdocx2pdf(file):
             )  # 注意file的数据类型是pathlib.WindowsPath，而ProcessFileName是字符串
 
 
+# module\target\md_split.py
+def Split(file):
+    with open(file, 'r', encoding='UTF-8') as ProcessFile:
+        FileTxt = ProcessFile.read()
+        ProcessFile.close()
+        InputLines = FileTxt.split('\n')
+        wordcount = 0
+        SplitStand = 800  # 分割标准
+        SplitTime = 1  # 分割次数
+        SplitCount = 800  # 分割时的字数，初始值
+        OutputLines = []
+        for InputLine in InputLines:
+
+            if InputLine == '':
+                continue
+
+            if wordcount > SplitCount:  # 比较字数和分割标准
+                wordcount += len(InputLine)
+                OutputLine = InputLine + "\n\n# " + str(SplitCount)
+                SplitTime += 1
+                SplitCount = SplitStand * SplitTime  # 计算下一次分割标准
+            else:
+                wordcount += len(InputLine)
+                OutputLine = InputLine
+            OutputLines.append(OutputLine + "\n\n")
+    with open(file, 'w', encoding='UTF-8') as OutPutFile:
+        OutPutFile.writelines(OutputLines)
+    OutPutFile.close()
+
+
 # Action
 
 
@@ -184,10 +221,21 @@ def moveoutput(file):
 
 
 # Situation
+
+
+# module\situation\docx2md.py
 def Situation():
     docx2md_FileList = list(p.glob("**/*- 副本.docx"))
     for docx2md_File in docx2md_FileList:
         docx2md(docx2md_File)
+
+
+# module\situation\md2md.py
+def MDSituation():
+    md2md_FileList = list(p.glob("**/*- 副本.md"))
+    for md2md_File in md2md_FileList:
+        print(md2md_File)
+        md2md(md2md_File)
 
 
 # Action
@@ -220,6 +268,14 @@ def Print():
         printdocx2pdf(file)
 
 
+# module\target\md_split.py
+def TargetMD():
+    p = Path(ProcessFilePath)
+    FileList = list(p.glob("**/*.md"))
+    for file in FileList:
+        Split(file)
+
+
 # Result
 def Result():
     p = Path(ProcessFilePath)
@@ -241,6 +297,13 @@ def Run2lang(event):
     Action()
     Target2lang()
     Print()
+    Result()
+
+
+def RunMD(event):
+    MDSituation()
+    Action()
+    TargetMD()
     Result()
 
 
@@ -503,6 +566,11 @@ class App:
         self.RunAppButton.bind("<Button-1>", Run2lang)
         self.RunAppButton.grid(row=1, column=0)
 
+        self.RunAppButton = ttk.Button(
+            self.frame5, text="MD格式转换")  #,style='RunAppButton.TLabel'
+        self.RunAppButton.bind("<Button-1>", RunMD)
+        self.RunAppButton.grid(row=2, column=0)
+
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -511,7 +579,7 @@ if __name__ == "__main__":
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
     ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
     root.iconphoto(True, tk.PhotoImage(file='.YiPai\main.png'))
-    root.call('tk', 'scaling', ScaleFactor / 75)
+    root.call('tk', 'scaling', ScaleFactor / 75) #
     root.resizable(False, False)
 
     root.tk.call("source", r".YiPai\sun-valley.tcl")
