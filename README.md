@@ -119,13 +119,12 @@
 ## 使用的软件包
 
 - [Sun-Valley-ttk-theme](https://github.com/rdbende/Sun-Valley-ttk-theme) MIT 许可证
-
 - ……
 
 ## 开发环境
 
 - Python 3.9
 
-## 第三方库
+### 第三方库
 
 `pip install -r requirements.txt`

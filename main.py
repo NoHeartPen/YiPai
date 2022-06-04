@@ -7,7 +7,7 @@ from docx.shared import Pt  # 设置文本缩进
 import shutil  # pip install shutilwhich
 from docx2pdf import convert
 import tkinter as tk
-import ctypes
+import ctypes # Window与C++ 默认
 from tkinter import ttk
 
 # Main
