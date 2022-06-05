@@ -1,5 +1,7 @@
 *.docx
 *.pdf
+*.txt
+.process/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
