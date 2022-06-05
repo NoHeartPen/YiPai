@@ -12,15 +12,14 @@ ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
 
 
 # Situation
-def Open():
-    FileList = list(p.glob("**/*- 副本.docx"))
-    for File in FileList:
-        filepath = '"' + os.path.abspath(
-            File) + '"'  # 防止路径中的空格造成干扰，必须要把路径用""包裹起来
-        programpath = r"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE"  # 请注意，这里必须使用r指定为原生字符串，否则无法正确解析地址
-        windowspath = '"' + programpath + '"' + ' ' + filepath
-        command = '"' + windowspath + '"'  # 要正确解析命名，必须再用""包裹一次
-        os.system(command)
+def Open(file):
+    filepath = '"' + os.path.abspath(file) + '"'  # 防止路径中的空格造成干扰，必须要把路径用""包裹起来
+    programpath = r"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE"  # 请注意，这里必须使用r指定为原生字符串，否则无法正确解析地址（或者是用/）
+    windowspath = '"' + programpath + '"' + ' ' + filepath
+    command = '"' + windowspath + '"'  # 要正确解析命名，必须再用""包裹一次
+    os.system(command)
 
 
-Open()
+FileList = list(p.glob("**/*- 副本.docx"))
+for file in FileList:
+    Open(file)
