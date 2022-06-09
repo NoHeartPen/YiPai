@@ -8,9 +8,8 @@ import json
 # Main
 Inputpath = os.getcwd()
 p = Path(Inputpath)
-ProcessFilePath = Inputpath + '\\.YiPai\\.process' + '\\'
-SettingFile = ProcessFilePath + 'defaultsetting.json'  # 奇怪，是转义么？
-SettingFile = '.YiPai\defaultsetting.json'  # 可以加载其他配置
+ProcessFilePath = Inputpath + '\\.YiPai' + '\\'
+SettingFile = ProcessFilePath + 'defaultsetting.json' # 注意配置文件没有放在.process
 
 SettingDict = dict()
 
