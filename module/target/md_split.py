@@ -19,17 +19,16 @@ def Split(file):
         SplitCount = 800  # 分割时的字数，初始值
         OutputLines = []
         for InputLine in InputLines:
+            wordcount += len(InputLine)
 
             if InputLine == '':
                 continue
 
             if wordcount > SplitCount:  # 比较字数和分割标准
-                wordcount += len(InputLine)
                 OutputLine = InputLine + "\n\n# " + str(SplitCount)
                 SplitTime += 1
                 SplitCount = SplitStand * SplitTime  # 计算下一次分割标准
             else:
-                wordcount += len(InputLine)
                 OutputLine = InputLine
             OutputLines.append(OutputLine + "\n\n")
     with open(file, 'w', encoding='UTF-8') as OutPutFile:
