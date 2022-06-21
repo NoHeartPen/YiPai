@@ -1,6 +1,7 @@
 *.docx
 *.pdf
 *.txt
+dist/*.md
 .process/
 # Byte-compiled / optimized / DLL files
 __pycache__/
